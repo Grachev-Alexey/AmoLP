@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 10%, 3.9%);
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.8%, 45.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --primary: hsl(240, 5.9%, 10%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(240, 4.8%, 95.9%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 5.9%, 10%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 3.7%, 15.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 25%);
+  --input: hsl(240, 3.7%, 20%);
+  --primary: hsl(246, 83%, 60%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .hover-lift:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  .status-indicator {
+    @apply relative inline-flex items-center;
+  }
+
+  .status-indicator::before {
+    @apply absolute w-2 h-2 bg-current rounded-full -left-3 top-1/2 -translate-y-1/2;
+    content: '';
+  }
+
+  .status-connected::before {
+    @apply bg-green-500;
+    box-shadow: 0 0 6px hsl(142, 76%, 36%);
+  }
+
+  .status-disconnected::before {
+    @apply bg-red-500;
+    box-shadow: 0 0 6px hsl(0, 84%, 60%);
+  }
+
+  .status-pending::before {
+    @apply bg-yellow-500;
+    box-shadow: 0 0 6px hsl(45, 93%, 47%);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(246, 83%, 60%) 0%, hsl(262, 83%, 58%) 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, hsl(262, 83%, 58%) 0%, hsl(278, 83%, 56%) 100%);
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: hsla(240, 3.7%, 15.9%, 0.8);
+  }
+
+  .sidebar-gradient {
+    background: linear-gradient(180deg, hsl(240, 10%, 3.9%) 0%, hsl(240, 3.7%, 15.9%) 100%);
+  }
+
+  /* Improve button visibility in dark theme */
+  .dark .btn-outline {
+    @apply border-border bg-card text-foreground;
+    border-width: 1px;
+  }
+
+  .dark .btn-outline:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  /* Fix button contrast in dark theme */
+  .dark button {
+    @apply text-foreground;
+  }
+
+  .dark .bg-white {
+    @apply bg-card;
+  }
+
+  .dark .text-black {
+    @apply text-foreground;
+  }
+
+  .dark .text-gray-500 {
+    @apply text-muted-foreground;
+  }
+
+  .dark .text-gray-600 {
+    @apply text-muted-foreground;
+  }
+
+  .dark .text-gray-700 {
+    @apply text-foreground;
+  }
+
+  .dark .text-gray-800 {
+    @apply text-foreground;
+  }
+
+  .dark .text-gray-900 {
+    @apply text-foreground;
+  }
+
+  /* Improve input field visibility */
+  .dark input[type="text"], 
+  .dark input[type="email"], 
+  .dark input[type="password"], 
+  .dark input[type="url"], 
+  .dark textarea, 
+  .dark select {
+    @apply bg-input border-border text-foreground;
+    border-width: 1px;
+  }
+
+  .dark input[type="text"]:focus, 
+  .dark input[type="email"]:focus, 
+  .dark input[type="password"]:focus, 
+  .dark input[type="url"]:focus, 
+  .dark textarea:focus, 
+  .dark select:focus {
+    @apply border-primary ring-1 ring-primary;
+  }
+
+  /* Improve select field visibility */
+  .dark select {
+    @apply bg-input border-border text-foreground;
+    border-width: 1px;
+  }
+
+  /* Improve placeholder text visibility */
+  .dark input::placeholder, 
+  .dark textarea::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  /* Fix dropdown menus */
+  .dark .dropdown-menu {
+    @apply bg-popover border-border text-foreground;
+  }
+
+  .dark .dropdown-item {
+    @apply text-foreground;
+  }
+
+  .dark .dropdown-item:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  /* Fix card backgrounds */
+  .dark .bg-gray-50 {
+    @apply bg-card;
+  }
+
+  .dark .bg-gray-100 {
+    @apply bg-muted;
+  }
+
+  /* Ensure proper contrast for all text elements */
+  .dark .prose {
+    @apply text-foreground;
+  }
+
+  .dark .prose h1,
+  .dark .prose h2,
+  .dark .prose h3,
+  .dark .prose h4,
+  .dark .prose h5,
+  .dark .prose h6 {
+    @apply text-foreground;
+  }
+}
